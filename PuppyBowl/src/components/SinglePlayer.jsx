@@ -38,7 +38,7 @@ export default function SinglePlayer() {
   return (
     <div className="singleplayer">
       <h3>Player Details</h3>
-      <h4>Player Name: {selectedPlayer.name}</h4>
+      <h4>{selectedPlayer.name}</h4>
       <p>Breed: {selectedPlayer.breed}</p>
       <p>Status: {selectedPlayer.status}</p>
       <img src={selectedPlayer.imageUrl} alt={`${selectedPlayer.name}`} />
