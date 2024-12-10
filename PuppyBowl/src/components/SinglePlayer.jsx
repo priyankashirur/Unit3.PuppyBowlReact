@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { fetchSinglePlayer } from "../API";
 
 export default function SinglePlayer() {
   const { id } = useParams(); // Extract the player ID from the URL
+  const navigate = useNavigate(); //initialize usenavigate
   console.log("Extracted ID from URL:", id); // Debug log for ID
 
   const [selectedPlayer, setSelectedPlayer] = useState(null);
@@ -29,13 +30,19 @@ export default function SinglePlayer() {
     return <p>Loading player details...</p>; // Handle loading state
   }
 
+  const handleBackToPlayers = () => {
+    // Navigate to a details page with the player's ID
+    navigate(`/`);
+  };
+
   return (
     <div className="singleplayer">
       <h3>Player Details</h3>
       <h4>Player Name: {selectedPlayer.name}</h4>
       <p>Breed: {selectedPlayer.breed}</p>
       <p>Status: {selectedPlayer.status}</p>
-      <img src={player.imageUrl} alt={`${player.name}`} />
+      <img src={selectedPlayer.imageUrl} alt={`${selectedPlayer.name}`} />
+      <button onClick={() => handleBackToPlayers()}>Back to all players</button>
     </div>
   );
 }
