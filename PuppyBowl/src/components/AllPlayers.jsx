@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchPlayers } from "../API";
 import { useNavigate } from "react-router-dom";
 
-export default function AllPlayers() {
+export default function AllPlayers({}) {
   const [searchQuery, setSearchQuery] = useState("");
   const [players, setPlayers] = useState([]);
 
@@ -10,11 +10,15 @@ export default function AllPlayers() {
 
   useEffect(() => {
     const getPlayers = async () => {
-      const fetchedPlayers = await fetchPlayers();
-      setPlayers(fetchedPlayers);
+      try {
+        const fetchedPlayers = await fetchPlayers();
+        setPlayers(fetchedPlayers);
+      } catch (error) {
+        console.error("Error fetching players:", error);
+      }
     };
     getPlayers();
-  }, [players]);
+  }, []);
 
   const filteredPlayers = players.filter((player) =>
     player.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -29,6 +33,7 @@ export default function AllPlayers() {
 
   return (
     <div>
+      <br />
       <div className="search-bar">
         <label htmlFor="search" className="search-label">
           Search for a Player:

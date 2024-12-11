@@ -4,8 +4,21 @@ import SinglePlayer from "./components/SinglePlayer";
 import NewPlayerForm from "./components/NewPlayerForm";
 import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
 import "./App.css";
+import { addPlayer } from "./API";
 
 function App() {
+  const [players, setPlayers] = useState([]);
+
+  const handleAddPlayer = async (newPlayer) => {
+    try {
+      const addedPlayer = await addPlayer(newPlayer);
+      console.log("Player added successfully:", addedPlayer);
+      setPlayers((prevPlayers) => [...prevPlayers, addedPlayer]);
+    } catch (error) {
+      console.error("Failed to add new player:", error);
+    }
+  };
+
   return (
     <div id="container">
       <div id="header">
@@ -16,7 +29,7 @@ function App() {
         <Link to="/">Home</Link>
         <Link to="/players/:id">Single player</Link>
       </div> */}
-      <NewPlayerForm></NewPlayerForm>
+      <NewPlayerForm onAddPlayer={handleAddPlayer} />
       <div id="main-section">
         <Routes>
           <Route path="/" element={<AllPlayers />} />

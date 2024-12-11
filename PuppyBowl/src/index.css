@@ -8,15 +8,16 @@ body {
   font-family: andale mono, monospace;
 }
 
-.formsearch {
+.newplayerform {
   padding: 10px;
   border: 2px solid brown;
   border-radius: 15px;
   color: black;
   margin: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+}
+
+.search-bar {
+  text-align: center;
 }
 
 .allplayers {
